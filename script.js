@@ -22,3 +22,31 @@ document.getElementById('searchBtn').addEventListener('click', function () {
         }
     });
 });
+
+document.getElementById("addProductForm").addEventListener("submit", function(event) {
+    event.preventDefault(); // Ngăn reload trang
+
+    // Lấy giá trị từ form
+    const image = document.getElementById("productImage").value.trim();
+    const name = document.getElementById("productName").value.trim();
+    const desc = document.getElementById("productDesc").value.trim();
+    const price = document.getElementById("productPrice").value.trim();
+
+    // Tạo phần tử article
+    const article = document.createElement("article");
+    article.classList.add("product-item");
+
+    article.innerHTML = `
+        <img src="${image}" alt="${name}">
+        <h2>${name}</h2>
+        <p>Mô tả: ${desc}</p>
+        <p>Giá: ${Number(price).toLocaleString("vi-VN")} VND</p>
+    `;
+
+    // Thêm vào danh sách sản phẩm
+    const productList = document.getElementById("product-list");
+    productList.appendChild(article);
+
+    this.reset();
+    this.classList.add("hidden");
+});
